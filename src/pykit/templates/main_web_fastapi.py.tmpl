@@ -36,7 +36,8 @@ def main():
     except ImportError:
         print("Uvicorn required. Install via: pip install uvicorn[standard]")
         return
-    uvicorn.run("astro.main:app", host="127.0.0.1", port=8000, reload=True)
+    module_path = f"{__package__}.main:app" if __package__ else "${package}.main:app"
+    uvicorn.run(module_path, host="127.0.0.1", port=8000, reload=True)
 
 if __name__ == "__main__":
     main()

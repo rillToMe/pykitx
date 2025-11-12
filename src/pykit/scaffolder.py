@@ -120,6 +120,7 @@ def scaffold(name, license_id, proj_type, init_git, description, author, email, 
     tmpl_name = tmpl_map.get(template, "main_cli_stdlib.py.tmpl")
     main_raw = _load_text(tmpl_name)
     main_code = Template(main_raw).safe_substitute(project_name=name, package=package)
+    (src_pkg_dir / "main.py").write_text(main_code, encoding="utf-8")
     if template == "web-fastapi":
        
         main_code = main_code.replace("{{package}}", package)
@@ -192,7 +193,7 @@ def scaffold(name, license_id, proj_type, init_git, description, author, email, 
     print("─────────────────────────────────────────────")
     print("Next steps:")
     print(f"  cd {name}")
-    print("  pip install -e.")
+    print("  pip install -e .")
     print("  # or for quick setup:")
     print("  pip install -r requirements.txt")
     print(f"  {name}")
